@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Entity
 @Table(name = "user")
 @Data
@@ -16,6 +18,14 @@ public class User {
     private String name;
     @Column(name = "password")
     private String password;
-    @Column(name = "type")
-    private String type;
+    @Column(name = "typeId")
+    private int typeId;
+    @Column(name = "salary")
+    private double salary;
+    @Column(name = "budget")
+    private double budget;
+    @Column(name = "date")
+    private Date date;
+    @Column(name = "fired")
+    private int fired;
 }
