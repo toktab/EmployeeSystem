@@ -14,4 +14,8 @@ public class Message {
     private int to;
     @Column(name = "msg")
     private String message;
+
+    @ManyToOne
+    @JoinColumn(name="userId", nullable=false)
+    private User user;
 }

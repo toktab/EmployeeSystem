@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "type")
 @Data
@@ -16,4 +18,7 @@ public class Type {
     private int creatorId;
     @Column(name = "rank")
     private int rank;
+
+    @OneToMany(mappedBy = "type")
+    private List<User> userList;
 }

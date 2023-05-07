@@ -22,4 +22,8 @@ public class Funding {
     private Double amount;
     @Column(name = "date")
     private Date date;
+
+    @ManyToOne
+    @JoinColumn(name="userId", nullable=false)
+    private User user;
 }
