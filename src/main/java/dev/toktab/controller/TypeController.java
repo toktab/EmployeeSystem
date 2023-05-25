@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/types")
-@Component
 public class TypeController {
     @Autowired
     private TypeRepository typeRepository;

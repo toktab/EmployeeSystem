@@ -20,8 +20,6 @@ public class User {
     private String name;
     @Column(name = "password")
     private String password;
-    @Column(name = "type_id")
-    private int typeId;
     @Column(name = "salary")
     private double salary;
     @Column(name = "budget")
@@ -31,16 +29,20 @@ public class User {
     @Column(name = "fired")
     private int fired;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="type_id", nullable=false)
     private Type type;
     @OneToMany(mappedBy = "user")
     private List<SalaryHistory> salaryHistoryList;
     @OneToMany(mappedBy = "user")
     private List<Budget> budgetList;
-    @OneToMany(mappedBy = "user")
-    private List<Funding> fundingList;//questionable
-    @OneToMany(mappedBy = "user")
-    private List<Message> messageList;//questionable
+    @OneToMany(mappedBy = "toUser")
+    private List<Funding> receivedFundsList;
+    @OneToMany(mappedBy = "fromUser")
+    private List<Funding> sendFundsList;
+    @OneToMany(mappedBy = "toUser")
+    private List<Message> receivedMessageList;
+    @OneToMany(mappedBy = "fromUser")
+    private List<Message> sendMessageList;//questionable
 
 }

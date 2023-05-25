@@ -13,7 +13,7 @@ import java.sql.Date;
 public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
     @Column(name = "amount")
     private Double amount;
     @Column(name = "description")

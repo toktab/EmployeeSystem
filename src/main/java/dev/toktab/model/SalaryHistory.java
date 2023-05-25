@@ -11,8 +11,6 @@ public class SalaryHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "userId")
-    private int userId;
     @Column(name = "fromDate")
     private Date fromDate;
     @Column(name = "toDate")

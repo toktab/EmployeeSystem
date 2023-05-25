@@ -19,6 +19,6 @@ public class Type {
     @Column(name = "rank")
     private int rank;
 
-    @OneToMany(mappedBy = "type")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "type")
     private List<User> userList;
 }
