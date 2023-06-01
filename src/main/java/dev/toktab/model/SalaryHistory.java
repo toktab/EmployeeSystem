@@ -1,11 +1,15 @@
 package dev.toktab.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "salaryhistory")
+@Data
+@NoArgsConstructor
 public class SalaryHistory {
 
     @Id
