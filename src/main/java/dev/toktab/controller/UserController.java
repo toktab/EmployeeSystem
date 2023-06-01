@@ -3,6 +3,8 @@ package dev.toktab.controller;
 import dev.toktab.exception.ResourceException;
 import dev.toktab.model.User;
 import dev.toktab.repository.UserRepository;
+import dev.toktab.service.UserService;
+import dev.toktab.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
@@ -17,48 +19,30 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
-//
-//    @Query(value = "select a.id as student_id, a.name as student_name, b.id, b.rank from user a\n" +
-//            "join type b on a.id = b.id;", nativeQuery = true)
-//    Collection<User> findAllActiveUsersNative() {
-//        return null;
-//    }
+    UserService userService = new UserServiceImp();
 
-    //    @Query(value = "select a.id as student_id, a.name as student_name, b.id, b.rank from user a\n" +
-//            "join type b on a.id = b.id;", nativeQuery = true)
-    @GetMapping()
+    @GetMapping("/get")
     public List<User> getAllUsers() {
-
-        return userRepository.findAll();
-    }
-    //create user
-    @PostMapping
-    public User createUser(@RequestBody User user){
-        return userRepository.save(user);
+        return userService.get();
     }
 
-    //getId
+    @PostMapping()
+    public User createUser(@RequestBody User user) {
+        return userService.create(user);
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<User> getUserId(@PathVariable long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceException("User Not Found With the following ID -> " + id));
-        return ResponseEntity.ok(user);
+        return userService.get(id);
     }
 
-    //updateUser
-    @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User userDetails){
-        User updateUser = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceException("User Not Found With the following ID -> " + id));
-        updateUser.setName(userDetails.getName());
-        updateUser.setPassword(userDetails.getName());
-        updateUser.setType(userDetails.getType());
-        updateUser.setBudget(userDetails.getBudget());
-        updateUser.setFired(userDetails.getFired());
-        updateUser.setSalary(userDetails.getSalary());
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User userDetails) {
+        return userService.update(id, userDetails);
+    }
 
-        userRepository.save(updateUser);
-
-        return ResponseEntity.ok(updateUser);
+    @DeleteMapping("/delete/{id}")
+    public boolean deleteUser(@PathVariable long id) {
+        return userService.delete(id);
     }
 }
