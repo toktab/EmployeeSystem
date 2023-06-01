@@ -4,7 +4,6 @@ import dev.toktab.exception.ResourceException;
 import dev.toktab.model.User;
 import dev.toktab.repository.UserRepository;
 import dev.toktab.service.UserService;
-import dev.toktab.service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
-    UserService userService = new UserServiceImp();
+    UserService userService = new UserService();
 
     @GetMapping("/get")
     public List<User> getAllUsers() {

@@ -1,15 +1,13 @@
 package dev.toktab.controller;
 
 import dev.toktab.model.Type;
-import dev.toktab.model.User;
 import dev.toktab.repository.TypeRepository;
-import dev.toktab.repository.UserRepository;
+import dev.toktab.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,15 +16,30 @@ import java.util.List;
 public class TypeController {
     @Autowired
     private TypeRepository typeRepository;
-//
-//    @Query(value = "select a.id as student_id, a.name as student_name, b.id, b.rank from user a\n" +
-//            "join type b on a.id = b.id;", nativeQuery = true)
-//    Collection<User> findAllActiveUsersNative() {
-//        return null;
-//    }
-    @GetMapping()
-    public List<Type> getAllTypes(){
+    TypeService typeService = new TypeService();
 
-        return typeRepository.findAll();
+    @GetMapping("/get")
+    public List<Type> getAllTypes() {
+        return typeService.get();
+    }
+
+    @PostMapping()
+    public Type createType(@RequestBody Type type) {
+        return typeService.create(type);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Type> getTypeId(@PathVariable long id) {
+        return typeService.get(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Type> updateType(@PathVariable long id, @RequestBody Type typeDetails) {
+        return typeService.update(id, typeDetails);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public boolean deleteType(@PathVariable long id) {
+        return typeService.delete(id);
     }
 }
