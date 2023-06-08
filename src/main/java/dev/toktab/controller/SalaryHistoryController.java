@@ -3,19 +3,22 @@ package dev.toktab.controller;
 import dev.toktab.model.SalaryHistory;
 import dev.toktab.repository.SalaryHistoryRepository;
 import dev.toktab.service.SalaryHistoryService;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/salary_histories")
 public class SalaryHistoryController {
-    @Autowired
-    private SalaryHistoryRepository salaryHistoryRepository;
-    SalaryHistoryService salaryHistoryService = new SalaryHistoryService();
 
+    private final SalaryHistoryRepository salaryHistoryRepository;
+    @Autowired
+    SalaryHistoryService salaryHistoryService;
     @GetMapping("/get")
     public List<SalaryHistory> getAllSalaryHistories() {
         return salaryHistoryService.get();
@@ -31,9 +34,9 @@ public class SalaryHistoryController {
         return salaryHistoryService.get(id);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<SalaryHistory> updateSalaryHistory(@PathVariable long id, @RequestBody SalaryHistory salaryHistoryDetails) {
-        return salaryHistoryService.update(id, salaryHistoryDetails);
+    @PutMapping("/update")
+    public ResponseEntity<SalaryHistory> updateSalaryHistory(@RequestBody SalaryHistory salaryHistoryDetails) {
+        return salaryHistoryService.update(salaryHistoryDetails);
     }
 
     @DeleteMapping("/delete/{id}")

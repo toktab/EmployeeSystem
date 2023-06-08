@@ -1,5 +1,6 @@
 package dev.toktab.model;
 
+import dev.toktab.model.interfaces.IEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @Table(name = "user")
 @Data
 @NoArgsConstructor
-public class User {
+public class User implements IEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -43,6 +44,17 @@ public class User {
     @OneToMany(mappedBy = "toUser")
     private List<Message> receivedMessageList;
     @OneToMany(mappedBy = "fromUser")
-    private List<Message> sendMessageList;//questionable
+    private List<Message> sendMessageList;
 
+    @Override
+    public void memberWiseUpdate(IEntity entity) {
+        User newEntity = (User) entity;
+
+        this.setName(newEntity.getName());
+        this.setPassword(newEntity.getPassword());
+        this.setType(newEntity.getType());
+        this.setBudget(newEntity.getBudget());
+        this.setFired(newEntity.getFired());
+        this.setSalary(newEntity.getSalary());
+    }
 }

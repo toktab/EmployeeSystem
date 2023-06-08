@@ -3,20 +3,20 @@ package dev.toktab.controller;
 import dev.toktab.model.Type;
 import dev.toktab.repository.TypeRepository;
 import dev.toktab.service.TypeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/types")
 public class TypeController {
+    private final TypeRepository typeRepository;
     @Autowired
-    private TypeRepository typeRepository;
-    TypeService typeService = new TypeService();
+    TypeService typeService;
 
     @GetMapping("/get")
     public List<Type> getAllTypes() {
@@ -33,9 +33,9 @@ public class TypeController {
         return typeService.get(id);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Type> updateType(@PathVariable long id, @RequestBody Type typeDetails) {
-        return typeService.update(id, typeDetails);
+    @PutMapping("/update")
+    public ResponseEntity<Type> updateType(@RequestBody Type typeDetails) {
+        return typeService.update(typeDetails);
     }
 
     @DeleteMapping("/delete/{id}")

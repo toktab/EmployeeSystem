@@ -1,5 +1,6 @@
 package dev.toktab.model;
 
+import dev.toktab.model.interfaces.IEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.sql.Date;
 @Table(name = "salaryhistory")
 @Data
 @NoArgsConstructor
-public class SalaryHistory {
+public class SalaryHistory implements IEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +26,13 @@ public class SalaryHistory {
     @ManyToOne
     @JoinColumn(name="userId", nullable=false)
     private User user;
+
+    @Override
+    public void memberWiseUpdate(IEntity entity) {
+        SalaryHistory newEntity = (SalaryHistory) entity;
+
+        this.setFromDate(newEntity.getFromDate());
+        this.setToDate(newEntity.getToDate());
+        this.setSalary(newEntity.getSalary());
+    }
 }

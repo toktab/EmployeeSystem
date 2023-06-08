@@ -4,6 +4,7 @@ import dev.toktab.exception.ResourceException;
 import dev.toktab.model.User;
 import dev.toktab.repository.UserRepository;
 import dev.toktab.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,12 @@ import java.util.Collection;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
 public class UserController {
+    private final UserRepository userRepository;
     @Autowired
-    private UserRepository userRepository;
-    UserService userService = new UserService();
+    UserService userService;
 
     @GetMapping("/get")
     public List<User> getAllUsers() {
@@ -35,9 +37,9 @@ public class UserController {
         return userService.get(id);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody User userDetails) {
-        return userService.update(id, userDetails);
+    @PutMapping("/update")
+    public ResponseEntity<User> updateUser(@RequestBody User userDetails) {
+        return userService.update(userDetails);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -6,18 +6,20 @@ import dev.toktab.repository.MessageRepository;
 import dev.toktab.repository.UserRepository;
 import dev.toktab.service.MessageService;
 import dev.toktab.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/messages")
 public class MessageController {
+    private final MessageRepository messageRepository;
     @Autowired
-    private MessageRepository messageRepository;
-    MessageService messageService = new MessageService();
+    MessageService messageService;
 
     @GetMapping("/get")
     public List<Message> getAllMessages() {
@@ -34,9 +36,9 @@ public class MessageController {
         return messageService.get(id);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Message> updateMessage(@PathVariable long id, @RequestBody Message messageDetails) {
-        return messageService.update(id, messageDetails);
+    @PutMapping("/update")
+    public ResponseEntity<Message> updateMessage(@RequestBody Message messageDetails) {
+        return messageService.update(messageDetails);
     }
 
     @DeleteMapping("/delete/{id}")
