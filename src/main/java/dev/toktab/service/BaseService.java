@@ -13,7 +13,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BaseService<T extends IEntity> implements IService<T>{
-    private final JpaRepository<T, Long> repository;
+    private JpaRepository<T, Long> repository;
+
+    public void setRepository(JpaRepository<T, Long> jpaRepository){
+        this.repository = jpaRepository;
+    }
 
     @Override
     public List<T> get() {

@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Budget implements IEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "amount")
     private Double amount;
     @Column(name = "description")

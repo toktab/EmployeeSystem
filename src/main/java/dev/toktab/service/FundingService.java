@@ -15,10 +15,7 @@ import java.util.List;
 @Service
 public class FundingService extends BaseService<Funding> implements IFundingService {
     @Autowired
-    private FundingRepository fundingRepository;
-
-    public FundingService(FundingRepository fundingRepository) {
-        super(fundingRepository);
-        this.fundingRepository = fundingRepository;
+    public void setFundingRepository(FundingRepository fundingRepository){
+        super.setRepository(fundingRepository);
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class Type implements IEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "creatorId")
     private int creatorId;
     @Column(name = "rank")

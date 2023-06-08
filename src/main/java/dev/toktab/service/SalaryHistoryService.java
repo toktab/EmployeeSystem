@@ -3,6 +3,7 @@ package dev.toktab.service;
 import dev.toktab.exception.ResourceException;
 import dev.toktab.model.SalaryHistory;
 import dev.toktab.model.User;
+import dev.toktab.repository.FundingRepository;
 import dev.toktab.repository.SalaryHistoryRepository;
 import dev.toktab.repository.UserRepository;
 import dev.toktab.service.interfaces.ISalaryHistoryService;
@@ -15,11 +16,8 @@ import java.util.List;
 
 @Service
 public class SalaryHistoryService extends BaseService<SalaryHistory> implements ISalaryHistoryService {
-    public SalaryHistoryService(SalaryHistoryRepository salaryHistoryRepository) {
-        super(salaryHistoryRepository);
-        this.salaryHistoryRepository = salaryHistoryRepository;
-    }
-
     @Autowired
-    private SalaryHistoryRepository salaryHistoryRepository;
+    public void setSalaryHistoryRepository(SalaryHistoryRepository salaryHistoryRepository){
+        super.setRepository(salaryHistoryRepository);
+    }
 }

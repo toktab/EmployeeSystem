@@ -9,12 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BudgetService extends BaseService<Budget> implements IBudgetService {
-
-    public BudgetService(BudgetRepository budgetRepository) {
-        super(budgetRepository);
-        this.budgetRepository = budgetRepository;
-    }
-
     @Autowired
-    private BudgetRepository budgetRepository;
+    public void setBudgetRepository(BudgetRepository budgetRepository){
+        super.setRepository(budgetRepository);
+    }
 }

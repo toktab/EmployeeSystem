@@ -2,6 +2,7 @@ package dev.toktab.service;
 
 import dev.toktab.exception.ResourceException;
 import dev.toktab.model.Type;
+import dev.toktab.repository.SalaryHistoryRepository;
 import dev.toktab.repository.TypeRepository;
 import dev.toktab.service.interfaces.ITypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,8 @@ import java.util.List;
 
 @Service
 public class TypeService extends BaseService<Type> implements ITypeService {
-
-    public TypeService(TypeRepository typeRepository) {
-        super(typeRepository);
-        this.typeRepository = typeRepository;
-    }
-
     @Autowired
-    private TypeRepository typeRepository;
-
-
-
+    public void setTypeRepository(TypeRepository typeRepository){
+        super.setRepository(typeRepository);
+    }
 }

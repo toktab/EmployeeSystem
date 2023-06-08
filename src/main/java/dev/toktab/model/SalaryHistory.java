@@ -15,7 +15,7 @@ public class SalaryHistory implements IEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     @Column(name = "fromDate")
     private Date fromDate;
     @Column(name = "toDate")

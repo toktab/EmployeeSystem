@@ -2,6 +2,7 @@ package dev.toktab.service;
 
 import dev.toktab.exception.ResourceException;
 import dev.toktab.model.Message;
+import dev.toktab.repository.FundingRepository;
 import dev.toktab.repository.MessageRepository;
 import dev.toktab.service.interfaces.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,8 @@ import java.util.List;
 
 @Service
 public class MessageService extends BaseService<Message> implements IMessageService {
-
-    public MessageService(MessageRepository messageRepository) {
-        super(messageRepository);
-        this.messageRepository = messageRepository;
-    }
-
     @Autowired
-    private MessageRepository messageRepository;
+    public void setMessageRepository(MessageRepository messageRepository){
+        super.setRepository(messageRepository);
+    }
 }

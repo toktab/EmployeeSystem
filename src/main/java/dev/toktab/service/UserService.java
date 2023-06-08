@@ -2,6 +2,7 @@ package dev.toktab.service;
 
 import dev.toktab.exception.ResourceException;
 import dev.toktab.model.User;
+import dev.toktab.repository.SalaryHistoryRepository;
 import dev.toktab.repository.UserRepository;
 import dev.toktab.service.interfaces.IUserService;
 import lombok.NoArgsConstructor;
@@ -18,19 +19,13 @@ import java.util.List;
 
 @Service
 public class UserService extends BaseService<User> implements IUserService {
-    public UserService(UserRepository userRepository) {
-        super(userRepository);
-        this.userRepository = userRepository;
-    }
-
     @Autowired
-    private UserRepository userRepository;
-
+    public void setUserRepository(UserRepository userRepository){
+        super.setRepository(userRepository);
+    }
 
     @Override
     public List<User> sort() {
-        List<User> userList= super.get();
-        userList.sort(Comparator.comparing(User::getId));
-        return userList;
+        return null;
     }
 }
