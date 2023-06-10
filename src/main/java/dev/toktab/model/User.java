@@ -4,15 +4,19 @@ import dev.toktab.model.interfaces.IEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
 @Data
 @NoArgsConstructor
-public class User implements IEntity {
+public class User implements IEntity, UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -56,5 +60,44 @@ public class User implements IEntity {
         this.setBudget(newEntity.getBudget());
         this.setFired(newEntity.getFired());
         this.setSalary(newEntity.getSalary());
+    }
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
+        grantedAuthorityList.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return "ROLE_" + type.getRank();
+            }
+        });
+        return grantedAuthorityList;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
