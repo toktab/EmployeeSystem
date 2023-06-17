@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/get")
+    @GetMapping("/get")//only admin and head-admin
     public List<User> getAllUsers() {
         return userService.get();
     }
@@ -32,17 +32,17 @@ public class UserController {
         return userService.create(user);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id}")//only admin and head-admin
     public ResponseEntity<User> getUserId(@PathVariable long id) {
         return userService.get(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update")//only admin and head-admin
     public ResponseEntity<User> updateUser(@RequestBody User userDetails) {
         return userService.update(userDetails);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")//only admin and head-admin
     public boolean deleteUser(@PathVariable long id) {
         return userService.delete(id);
     }

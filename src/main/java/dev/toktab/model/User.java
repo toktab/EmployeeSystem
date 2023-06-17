@@ -33,10 +33,8 @@ public class User implements IEntity, UserDetails {
     private Date date;
     @Column(name = "fired")
     private int fired;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="type_id", nullable=false)
-    private Type type;
+    @Column(name = "type_id")
+    private int type_id;
     @OneToMany(mappedBy = "user")
     private List<SalaryHistory> salaryHistoryList;
     @OneToMany(mappedBy = "user")
@@ -56,7 +54,6 @@ public class User implements IEntity, UserDetails {
 
         this.setName(newEntity.getName());
         this.setPassword(newEntity.getPassword());
-        this.setType(newEntity.getType());
         this.setBudget(newEntity.getBudget());
         this.setFired(newEntity.getFired());
         this.setSalary(newEntity.getSalary());
@@ -70,7 +67,7 @@ public class User implements IEntity, UserDetails {
         grantedAuthorityList.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return "ROLE_" + type.getRank();
+                return "ROLE_" + Global.getRoleName(type_id);
             }
         });
         return grantedAuthorityList;

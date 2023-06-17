@@ -42,4 +42,5 @@ public class BudgetController {
     public boolean deleteBudget(@PathVariable long id) {
         return budgetService.delete(id);
     }
+
 }

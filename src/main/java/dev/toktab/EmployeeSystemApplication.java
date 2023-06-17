@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-public class EmployeeSystemApplication {
+public class EmployeeSystemApplication {//message, sending money, setting budget, set fire, set salary
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeSystemApplication.class, args);
