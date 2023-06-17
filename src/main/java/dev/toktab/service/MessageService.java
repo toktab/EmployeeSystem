@@ -21,7 +21,6 @@ public class MessageService extends BaseService<Message> implements IMessageServ
 
     private MessageRepository messageRepository;
     private final UserService userService = new UserService();
-    private final List<Message> allMessages =  get();
 
     @Autowired
     public void setMessageRepository(MessageRepository messageRepository){
@@ -46,6 +45,7 @@ public class MessageService extends BaseService<Message> implements IMessageServ
 
     @Override
     public List<Message> receivedFrom(long fromUser, long toUser) {
+        List<Message> allMessages = get();
         List<Message> messageList = new ArrayList<>();
         for (Message allMessage : allMessages) {
             if (allMessage.getFromUser().getId() == fromUser &&
@@ -60,6 +60,7 @@ public class MessageService extends BaseService<Message> implements IMessageServ
 
     @Override
     public List<Message> received(long to) {
+        List<Message> allMessages = get();
         List<Message> messageList = new ArrayList<>();
         for (Message allMessage : allMessages) {
             if (allMessage.getToUser().getId() == to) {

@@ -29,6 +29,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.httpBasic();
         httpSecurity.authorizeHttpRequests()
+                .requestMatchers("/api/v1/**").hasRole("Head-Admin")
                 .requestMatchers("/api/v1/register/**").permitAll()
                 .requestMatchers("/api/v1/home/**").permitAll()
                 .requestMatchers("/api/v1/login/**").permitAll()

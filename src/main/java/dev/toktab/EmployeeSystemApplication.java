@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 public class EmployeeSystemApplication {//message, sending money, setting budget, set fire, set salary
+	//set fire
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeSystemApplication.class, args);

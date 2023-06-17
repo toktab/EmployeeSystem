@@ -43,10 +43,10 @@ public class User implements IEntity, UserDetails {
     private List<Funding> receivedFundsList;
     @OneToMany(mappedBy = "fromUser")
     private List<Funding> sendFundsList;
-    @OneToMany(mappedBy = "toUser")
-    private List<Message> receivedMessageList;
-    @OneToMany(mappedBy = "fromUser")
-    private List<Message> sendMessageList;
+//    @OneToMany(mappedBy = "toUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Message> receivedMessageList;
+//    @OneToMany(mappedBy = "fromUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Message> sendMessageList;
 
     @Override
     public void memberWiseUpdate(IEntity entity) {
